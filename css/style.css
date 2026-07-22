@@ -1173,3 +1173,203 @@ html, body {
     object-fit: cover;
   }
 }
+.hero-art {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    animation: heroImageIn 1.2s ease-out both;
+}
+
+@keyframes heroImageIn {
+    from {
+        opacity: 0;
+        transform: scale(1.15) translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+/* ================================
+   PROFESSIONAL SERVICE CARDS
+================================ */
+
+.service-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition:
+    transform .4s cubic-bezier(.2,.8,.2,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--laser);
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+
+
+/* صورة الخدمة */
+
+.service-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.service-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(12,14,17,.8),
+      transparent 55%
+    );
+  pointer-events: none;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+
+  transform: scale(1.08);
+
+  transition:
+    transform .8s cubic-bezier(.2,.8,.2,1),
+    filter .5s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.18);
+  filter: contrast(1.08) brightness(1.08);
+}
+
+
+/* رقم الخدمة */
+
+.service-number {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--laser-bright);
+
+  background: rgba(12,14,17,.75);
+  border: 1px solid var(--laser);
+
+  z-index: 2;
+
+  clip-path: polygon(
+    0 0,
+    75% 0,
+    100% 25%,
+    100% 100%,
+    25% 100%,
+    0 75%
+  );
+}
+
+
+/* محتوى الكارت */
+
+.service-content {
+  padding: 26px;
+}
+
+.service-content .num {
+  display: block;
+  margin-bottom: 10px;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+
+  color: var(--laser-bright);
+}
+
+.service-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.service-content p {
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+
+/* رابط الخدمة */
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--laser-bright);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.service-link span {
+  transition: transform .25s ease;
+}
+
+.service-link:hover span {
+  transform: translateX(-6px);
+}
+
+
+/* خط ليزر يظهر عند Hover */
+
+.service-card::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  height: 3px;
+
+  background: var(--laser);
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform .45s ease;
+
+  z-index: 5;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
