@@ -134,3 +134,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.service-image .sub-img').forEach(function (img) {
+    img.addEventListener('click', function (e) {
+      e.stopPropagation();
+      document.querySelectorAll('.service-image .sub-img.expanded').forEach(function (other) {
+        if (other !== img) other.classList.remove('expanded');
+      });
+      img.classList.toggle('expanded');
+    });
+  });
+});
