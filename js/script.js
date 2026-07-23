@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       menuToggle.textContent = isOpen ? "✕" : "☰";
       document.body.classList.toggle("menu-open", isOpen);
     });
-    navLinks.querySelectorAll("a").forEach(a => {
+    navLinks.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", () => {
         navLinks.classList.remove("open");
         menuToggle.textContent = "☰";
@@ -25,25 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Reveal on scroll ---------- */
   const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(el => io.observe(el));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+    revealEls.forEach((el) => io.observe(el));
   } else {
-    revealEls.forEach(el => el.classList.add("in"));
+    revealEls.forEach((el) => el.classList.add("in"));
   }
 
   /* ---------- Floating buttons: wire numbers ---------- */
-  document.querySelectorAll("[data-whatsapp-link]").forEach(el => {
-    const msg = el.getAttribute("data-whatsapp-msg") || "مرحباً، أرغب بالاستفسار عن خدمات قص وتكسير الجدران بالليزر.";
+  document.querySelectorAll("[data-whatsapp-link]").forEach((el) => {
+    const msg =
+      el.getAttribute("data-whatsapp-msg") ||
+      "مرحباً، أرغب بالاستفسار عن خدمات قص وتكسير الجدران بالليزر.";
     el.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   });
-  document.querySelectorAll("[data-call-link]").forEach(el => {
+  document.querySelectorAll("[data-call-link]").forEach((el) => {
     el.href = `tel:+${WHATSAPP_NUMBER}`;
   });
 
@@ -51,12 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const tiles = document.querySelectorAll(".project-tile");
   if (filterBtns.length && tiles.length) {
-    filterBtns.forEach(btn => {
+    filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        filterBtns.forEach(b => b.classList.remove("active"));
+        filterBtns.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const cat = btn.getAttribute("data-filter");
-        tiles.forEach(tile => {
+        tiles.forEach((tile) => {
           const match = cat === "all" || tile.getAttribute("data-cat") === cat;
           tile.style.display = match ? "" : "none";
         });
@@ -69,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (lightbox && tiles.length) {
     const lbImg = lightbox.querySelector("img");
     const lbCap = lightbox.querySelector(".lightbox-cap");
-    const visibleTiles = () => Array.from(tiles).filter(t => t.style.display !== "none");
+    const visibleTiles = () =>
+      Array.from(tiles).filter((t) => t.style.display !== "none");
     let current = 0;
 
     const openAt = (index) => {
@@ -94,8 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.querySelector(".lightbox-close").addEventListener("click", () => {
       lightbox.classList.remove("open");
     });
-    lightbox.querySelector(".lightbox-prev")?.addEventListener("click", () => openAt(current - 1));
-    lightbox.querySelector(".lightbox-next")?.addEventListener("click", () => openAt(current + 1));
+    lightbox
+      .querySelector(".lightbox-prev")
+      ?.addEventListener("click", () => openAt(current - 1));
+    lightbox
+      .querySelector(".lightbox-next")
+      ?.addEventListener("click", () => openAt(current + 1));
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) lightbox.classList.remove("open");
     });
@@ -122,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `الاسم: ${name}`,
         `الجوال: ${phone}`,
         `الخدمة المطلوبة: ${service}`,
-        message ? `التفاصيل: ${message}` : null
+        message ? `التفاصيل: ${message}` : null,
       ].filter(Boolean);
 
       const text = encodeURIComponent(lines.join("\n"));
@@ -135,14 +145,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.service-image .sub-img').forEach(function (img) {
-    img.addEventListener('click', function (e) {
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".service-image .sub-img").forEach(function (img) {
+    img.addEventListener("click", function (e) {
       e.stopPropagation();
-      document.querySelectorAll('.service-image .sub-img.expanded').forEach(function (other) {
-        if (other !== img) other.classList.remove('expanded');
-      });
-      img.classList.toggle('expanded');
+      document
+        .querySelectorAll(".service-image .sub-img.expanded")
+        .forEach(function (other) {
+          if (other !== img) other.classList.remove("expanded");
+        });
+      img.classList.toggle("expanded");
     });
   });
 });
